@@ -1,0 +1,38 @@
+{
+  "id": "salvage-union-dice",
+  "title": "Salvage Union — Scrapyard Dice (Dice So Nice)",
+  "description": "Custom 3D dice for Salvage Union: weathered sky-blue salvage-crate faces with a heavy distressed grunge finish, a bold black box frame, and rust-orange stamped Typo Draft numerals — styled after the Salvage Union cover and the Crawler #279 emblem. Rendered via Dice So Nice!.",
+  "version": "1.0.0",
+  "authors": [
+    {
+      "name": "hexerpegi"
+    }
+  ],
+  "compatibility": {
+    "minimum": "13",
+    "verified": "14"
+  },
+  "esmodules": [
+    "scripts/salvage-union-dice.mjs"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "relationships": {
+    "requires": [
+      {
+        "id": "dice-so-nice",
+        "type": "module"
+      }
+    ]
+  },
+  "flags": {},
+  "url": "https://github.com/Hexnen/salvage-union-dice",
+  "manifest": "https://github.com/Hexnen/salvage-union-dice/releases/latest/download/module.json",
+  "download": "https://github.com/Hexnen/salvage-union-dice/releases/download/v1.0.0/module.zip",
+  "bugs": "https://github.com/Hexnen/salvage-union-dice/issues"
+}
