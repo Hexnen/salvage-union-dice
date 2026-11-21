@@ -8,9 +8,14 @@ const range = (a, b) => Array.from({ length: b - a + 1 }, (_, i) => a + i);
 Hooks.once("init", () => console.log(`${MODULE_ID} | init`));
 
 Hooks.once("diceSoNiceReady", async (dice3d) => {
+  if (game.modules.get("moinens-assorted-dice")?.active) {
+    console.log("salvage-union-dice | moinens-assorted-dice is active and provides these dice; standalone registration skipped");
+    return;
+  }
+  const mode = ["salvage-union", "salvageunion"].includes(game.system?.id) ? "preferred" : "default";
   console.log(`${MODULE_ID} | registering Salvage Union dice`);
 
-  dice3d.addSystem({ id: MODULE_ID, name: game.i18n.localize("SALVAGEUNIONDICE.System") }, "preferred");
+  dice3d.addSystem({ id: MODULE_ID, name: game.i18n.localize("SALVAGEUNIONDICE.System") }, mode);
 
   // Full-face art bakes the look in; the colorset only needs to match the body/bevels so the chamfer
   // strips blend with the faces. Matte "stone" suits baked full textures (metal/chrome/glass add
@@ -27,7 +32,7 @@ Hooks.once("diceSoNiceReady", async (dice3d) => {
       material: "stone",       // matte stone — renders the full baked textures cleanly (no plastic)
       font: "Arial"
     },
-    "preferred"
+    mode
   );
 
   // labels[i] = face value i+1. Full-bleed faces + parallel engraving heightmaps.
