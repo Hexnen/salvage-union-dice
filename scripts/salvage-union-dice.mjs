@@ -10,16 +10,16 @@ Hooks.once("init", () => console.log(`${MODULE_ID} | init`));
 Hooks.once("diceSoNiceReady", async (dice3d) => {
   console.log(`${MODULE_ID} | registering Salvage Union dice`);
 
-  dice3d.addSystem({ id: MODULE_ID, name: "Salvage Union" }, "preferred");
+  dice3d.addSystem({ id: MODULE_ID, name: game.i18n.localize("SALVAGEUNIONDICE.System") }, "preferred");
 
   // Full-face art bakes the look in; the colorset only needs to match the body/bevels so the chamfer
-  // strips blend with the faces. material "plastic" = matte/diffuse — the right default for baked full
-  // textures (metal/chrome/glass add reflections that wash out the painted art).
+  // strips blend with the faces. Matte "stone" suits baked full textures (metal/chrome/glass add
+  // reflections that wash out the painted art).
   dice3d.addColorset(
     {
       name: "salvage-union",
-      description: "Scrapyard",
-      category: "Salvage Union",
+      description: game.i18n.localize("SALVAGEUNIONDICE.Colorset.Scrapyard"),
+      category: game.i18n.localize("SALVAGEUNIONDICE.System"),
       foreground: "#f4f1ea",   // chat-result text tint (faces are images)
       background: "#8cc7d6",   // weathered sky-blue body / bevel fill
       edge: "#1b2327",
@@ -59,6 +59,9 @@ Hooks.once("diceSoNiceReady", async (dice3d) => {
       system: MODULE_ID,
       colorset: "salvage-union",
       labels: range(1, 4).map(() => `${TEX}/d4blank.webp`),
+      // REQUIRED (transparent): DSN only runs its d4 bump branch, which applies backgrounds.bumpMaps,
+      // when the top-level bumpMaps array is non-empty — without it the d4 renders flat.
+      bumpMaps: range(1, 4).map(() => `${TEX}/d4blank.webp`),
       backgrounds: {
         labels: range(1, 4).map((n) => `${TEX}/d4f${n}.webp`),
         bumpMaps: range(1, 4).map((n) => `${TEX}/d4f${n}-bump.webp`)
